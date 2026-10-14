@@ -1,0 +1,59 @@
+import React, { Component } from "react";
+import axios from "axios";
+import Global from "../Global";
+export default class CreateHospital extends Component {
+  cajaId = React.createRef();
+  cajaNombre = React.createRef();
+  cajaDireccion = React.createRef();
+  cajaTelefono = React.createRef();
+  cajaCamas = React.createRef();
+  url = Global.urlApiHospitales;
+  insertHospital = (event) => {
+    event.preventDefault();
+    let request = "api/hospitales";
+    let hospital = {
+      idHospital: this.cajaId.current.value,
+      nombre: this.cajaNombre.current.value,
+      direccion: this.cajaDireccion.current.value,
+      telefono: this.cajaTelefono.current.value,
+      camas: this.cajaCamas.current.value,
+    };
+
+    axios.post(this.url + request, hospital).then((response) => {
+      console.log("Insertado!!!");
+      this.setState({
+        mensaje: "Hospital insertado: " + hospital.nombre,
+      });
+    });
+  };
+  state = {
+    mensaje: "",
+  };
+  render() {
+    return (
+      <div>
+        <h1>Create Hospital</h1>
+        <h3 style={{ color: "fuchsia" }}>{this.state.mensaje}</h3>
+        <form>
+          <label>Id hospital</label>
+          <input type="number" ref={this.cajaId} className="form-control" />
+          <label>Nombre: </label>
+          <input type="text" ref={this.cajaNombre} className="form-control" />
+          <label>Dirección: </label>
+          <input
+            type="text"
+            ref={this.cajaDireccion}
+            className="form-control"
+          />
+          <label>Teléfono: </label>
+          <input type="text" ref={this.cajaTelefono} className="form-control" />
+          <label>Camas: </label>
+          <input type="number" ref={this.cajaCamas} className="form-control" />
+          <button onClick={this.insertHospital} className="btn btn-warning">
+            Create
+          </button>
+        </form>
+      </div>
+    );
+  }
+}
