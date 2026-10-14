@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "./../assets/images/wolverine2.png";
 import axios from "axios";
 import Global from "../Global";
 
@@ -27,7 +28,9 @@ export default class MenuComponent extends Component {
     return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#"></a>
+          <a className="navbar-brand" href="#">
+            <img src={logo} style={{ width: "60px" }} />
+          </a>
           <button
             className="navbar-toggler"
             type="button"
@@ -47,13 +50,18 @@ export default class MenuComponent extends Component {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/doctores/22">
-                  Doctores
+                <NavLink className="nav-link" to="/ejemplos">
+                  Ejemplo service
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/hospitales">
+                  Hospitales
                 </NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to="/createhospital">
-                  Hospitales
+                  New Hospital
                 </NavLink>
               </li>
               <li className="nav-item dropdown">
@@ -80,11 +88,6 @@ export default class MenuComponent extends Component {
                     );
                   })}
                 </ul>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">
-                  Disabled
-                </a>
               </li>
             </ul>
           </div>

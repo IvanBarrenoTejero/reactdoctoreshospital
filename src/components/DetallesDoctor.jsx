@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Global from "../Global";
+
 export default class DetallesDoctor extends Component {
   url = Global.urlApiDoctores;
   state = {
     doctor: null,
   };
+
   findDoctor = () => {
     let request = "api/doctores/" + this.props.iddoctor;
     axios.get(this.url + request).then((response) => {
@@ -15,14 +17,17 @@ export default class DetallesDoctor extends Component {
       });
     });
   };
+
   componentDidMount = () => {
     this.findDoctor();
   };
+
   componentDidUpdate = (oldProps) => {
     if (oldProps.iddoctor != this.props.iddoctor) {
       this.findDoctor();
     }
   };
+
   render() {
     return (
       <div>

@@ -1,37 +1,40 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Global from "../Global";
+import { Navigate } from "react-router-dom";
+import ServiceHospitales from "../services/ServiceHospitales";
+
 export default class CreateHospital extends Component {
   cajaId = React.createRef();
   cajaNombre = React.createRef();
   cajaDireccion = React.createRef();
   cajaTelefono = React.createRef();
   cajaCamas = React.createRef();
-  url = Global.urlApiHospitales;
+  service = new ServiceHospitales();
+
   insertHospital = (event) => {
     event.preventDefault();
-    let request = "api/hospitales";
     let hospital = {
-      idHospital: this.cajaId.current.value,
+      idHospital: parseInt(this.cajaId.current.value),
       nombre: this.cajaNombre.current.value,
       direccion: this.cajaDireccion.current.value,
       telefono: this.cajaTelefono.current.value,
-      camas: this.cajaCamas.current.value,
+      camas: parseInt(this.cajaCamas.current.value),
     };
-
-    axios.post(this.url + request, hospital).then((response) => {
-      console.log("Insertado!!!");
+    this.service.insertHospital(hospital).then((result) => {
       this.setState({
-        mensaje: "Hospital insertado: " + hospital.nombre,
+        status: true,
       });
     });
   };
+
   state = {
     mensaje: "",
+    status: false,
   };
+
   render() {
     return (
       <div>
+        {this.state.status == true && <Navigate to="/hospitales" />}
         <h1>Create Hospital</h1>
         <h3 style={{ color: "fuchsia" }}>{this.state.mensaje}</h3>
         <form>
