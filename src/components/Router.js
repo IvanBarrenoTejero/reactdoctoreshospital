@@ -19,6 +19,7 @@ export default class Router extends Component {
           <Route path="/" element={<HomeComponent />} />
           <Route path="/doctores/:idhospital" element={<DoctoresElement />} />
           <Route path="/createhospital" element={<CreateHospital />} />
+          <Rote path="/hospitales" element={<Hospitales />} />
         </Routes>
       </BrowserRouter>
     );
